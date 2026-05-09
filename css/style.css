@@ -1,0 +1,780 @@
+/* ============================================
+   MJ Portfolio — Design System
+   Dark-first theme
+   ============================================ */
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Colors — Dark Mode (Default) */
+  --color-bg: #0a0808;
+  --color-text: #f0ece9;
+  --color-text-secondary: #8a8180;
+  --color-surface: #171313;
+  --color-surface-hover: #1e1a1a;
+  --color-border: #2a2525;
+  --color-primary: #f0ece9;
+  --color-success: #80b912;
+  --color-accent: #c9b99a;
+
+  /* Glow for hover effects on dark bg */
+  --shadow-hover: 0 12px 28px rgba(200, 185, 155, 0.08), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-subtle: 0 2px 12px rgba(0, 0, 0, 0.4);
+
+  /* Typography */
+  --font-sans-serif: "General Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", Times, serif;
+
+  /* Font weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-heavy: 800;
+
+  /* Font sizes */
+  --font-size-base: 18.5px;
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 20px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 28px;
+  --font-size-xxxl: 36px;
+
+  /* Component sizes */
+  --font-size-profile-name: var(--font-size-xl);
+  --font-size-profile-name-mobile: var(--font-size-xxl);
+  --font-size-body: var(--font-size-base);
+  --font-size-intro: var(--font-size-base);
+  --font-size-update-title: var(--font-size-xl);
+  --font-size-update-title-mobile: var(--font-size-large);
+  --font-size-update-date: var(--font-size-medium);
+  --font-size-page-title: var(--font-size-xxxl);
+  --font-size-updates-heading: var(--font-size-xl);
+  --font-size-see-all: var(--font-size-medium);
+  --font-size-subscribe-heading: var(--font-size-xl);
+
+  /* Layout */
+  --content-max-width: 650px;
+  --content-padding: 30px;
+  --radius: 0.5rem;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.6em;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+blockquote, dd, dl, figcaption, figure, form, hr, li, ol, p, pre, table, ul, video {
+  margin: 0;
+  padding: 0;
+}
+
+ul[class], ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button, input, select, textarea {
+  -webkit-appearance: none;
+  font: inherit;
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  text-shadow: none;
+}
+
+/* --- Links --- */
+a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-text);
+  transition: 0.4s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+  transition: 0.2s ease;
+}
+
+a[class] {
+  color: inherit;
+  text-decoration: none;
+}
+
+a[class]:hover {
+  transition: 0.2s ease;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-bold);
+  line-height: 1.15em;
+  margin: 0;
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+.gh-viewport {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.gh-main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.gh-page {
+  padding: var(--content-padding);
+  padding-top: 60px;
+}
+
+.gh-container {
+  margin: 0 auto;
+  max-width: var(--content-max-width);
+  width: 100%;
+}
+
+/* ============================================
+   Floating Header Pill
+   ============================================ */
+.gh-top-header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.gh-top-header:hover {
+  text-decoration: none;
+  opacity: 1;
+  transform: translateX(-50%) scale(1.05) rotate(-1deg);
+  box-shadow: var(--shadow-hover);
+  border-color: #3a3535;
+}
+
+.gh-top-header-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.gh-top-header-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: var(--font-bold);
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.gh-top-header-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ============================================
+   Profile Section
+   ============================================ */
+.gh-profile {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.gh-profile-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 0 12px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #faf8f7; /* White background for the line-art image */
+  border: none;
+}
+
+.gh-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.75) translateY(12px); /* Final scale adjustment to guarantee the bottom black line is fully hidden */
+}
+
+.gh-profile-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: var(--font-bold);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  border-radius: 16px;
+}
+
+.gh-profile-name {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-profile-name);
+  font-weight: var(--font-normal);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  text-rendering: optimizeLegibility;
+}
+
+.gh-profile-name .gh-profile-title {
+  font-weight: var(--font-bold);
+}
+
+.gh-profile-subtitle {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-profile-name);
+  font-weight: var(--font-normal);
+  color: var(--color-text-secondary);
+  display: inline;
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================
+   Intro / Bio Section
+   ============================================ */
+.gh-intro {
+  text-align: left;
+  margin-bottom: 60px;
+}
+
+.gh-intro-content {
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-intro);
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+}
+
+.gh-intro-content p {
+  margin: 0 0 12px;
+}
+
+.gh-intro-content p:last-child {
+  margin-bottom: 0;
+}
+
+.gh-intro-content a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-text);
+}
+
+.gh-intro-content a:hover {
+  opacity: 0.7;
+}
+
+/* ============================================
+   Updates / Posts Section
+   ============================================ */
+.gh-updates {
+  text-align: left;
+}
+
+.gh-updates-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-updates-heading);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  text-rendering: optimizeLegibility;
+}
+
+.gh-coming-soon {
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.gh-postfeed {
+  margin-bottom: 24px;
+}
+
+.gh-update-card {
+  margin-bottom: 20px;
+}
+
+.gh-update-card:last-child {
+  margin-bottom: 0;
+}
+
+.gh-update-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gh-update-link:hover {
+  opacity: 1;
+}
+
+.gh-update-link:hover .gh-update-title {
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+.gh-update-image {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.gh-update-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gh-update-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: var(--color-surface);
+}
+
+.gh-update-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.gh-update-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-update-title);
+  font-weight: var(--font-normal);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 4px;
+  text-rendering: optimizeLegibility;
+  transition: opacity 0.2s ease;
+}
+
+.gh-update-date {
+  display: block;
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-update-date);
+  font-weight: var(--font-normal);
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+  margin-bottom: 0;
+  text-rendering: optimizeLegibility;
+}
+
+.gh-updates-footer {
+  padding-top: 20px;
+}
+
+.gh-see-all-link {
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-see-all);
+  font-weight: var(--font-normal);
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+.gh-see-all-link::after {
+  content: " →";
+}
+
+/* ============================================
+   Subscribe / Newsletter Section
+   ============================================ */
+.gh-subscribe {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: left;
+  margin: 60px auto;
+  max-width: 710px;
+  width: 100%;
+}
+
+.gh-subscribe h3 {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-subscribe-heading);
+  font-weight: var(--font-normal);
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.gh-subscribe p {
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0 0 24px;
+  opacity: 0.7;
+}
+
+.gh-subscribe-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gh-subscribe-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 50px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-medium);
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.gh-subscribe-input:focus {
+  box-shadow: 0 0 0 2px var(--color-text);
+}
+
+.gh-subscribe-input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
+.gh-subscribe-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-text);
+  color: var(--color-bg) !important;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.gh-subscribe-btn:hover {
+  opacity: 1;
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 8px 24px rgba(240, 236, 233, 0.12);
+  background: #e8e3df;
+}
+
+.gh-subscribe-status {
+  font-size: var(--font-size-small);
+  margin-top: 12px;
+  display: none;
+}
+
+.gh-subscribe-status.success {
+  display: block;
+  color: var(--color-success);
+}
+
+.gh-subscribe-status.error {
+  display: block;
+  color: #f05230;
+}
+
+/* ============================================
+   Coming Soon Badge
+   ============================================ */
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.coming-soon-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-success);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.gh-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 50px;
+  padding: 0 var(--content-padding);
+}
+
+.gh-foot-content {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: left;
+  max-width: 100%;
+  width: 710px;
+}
+
+.gh-foot-message {
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-medium);
+  color: var(--color-text);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+  opacity: 0.7;
+  text-rendering: optimizeLegibility;
+}
+
+.gh-foot-message a {
+  color: var(--color-text);
+}
+
+.gh-foot-credits {
+  font-family: var(--font-sans-serif);
+  font-size: var(--font-size-medium);
+  color: var(--color-text);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  margin: 0;
+  opacity: 0.7;
+  text-rendering: optimizeLegibility;
+}
+
+.gh-foot-credits a {
+  color: var(--color-text);
+}
+
+/* ============================================
+   Page Load Animation
+   ============================================ */
+@keyframes page-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gh-page {
+  animation: page-fade-in 0.5s ease-out;
+}
+
+.gh-foot {
+  animation: page-fade-in 0.6s ease-out 0.1s both;
+}
+
+/* Staggered entrance for sections */
+.gh-profile {
+  animation: page-fade-in 0.5s ease-out 0.05s both;
+}
+
+.gh-intro {
+  animation: page-fade-in 0.5s ease-out 0.1s both;
+}
+
+.gh-updates {
+  animation: page-fade-in 0.5s ease-out 0.15s both;
+}
+
+.gh-subscribe {
+  animation: page-fade-in 0.5s ease-out 0.2s both;
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Responsive — Mobile
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --content-padding: 20px;
+  }
+
+  .gh-page {
+    padding-top: 75px;
+  }
+
+  .gh-top-header {
+    width: 220px;
+  }
+
+  .gh-profile {
+    margin-bottom: 0;
+  }
+
+  .gh-profile-name {
+    font-size: var(--font-size-profile-name-mobile);
+  }
+
+  .gh-intro {
+    margin-bottom: 40px;
+  }
+
+  .gh-updates-title {
+    font-size: var(--font-size-updates-heading);
+  }
+
+  .gh-update-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
+
+  .gh-update-link {
+    gap: 12px;
+  }
+
+  .gh-update-title {
+    font-size: var(--font-size-update-title-mobile);
+  }
+
+  .gh-update-date {
+    font-size: var(--font-size-update-date);
+  }
+
+  .gh-subscribe {
+    margin: 3rem 0;
+    padding: 2rem;
+  }
+
+  .gh-foot-content {
+    padding: 24px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .gh-profile-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .gh-profile-avatar-placeholder {
+    font-size: 24px;
+  }
+
+  .gh-subscribe-form {
+    flex-direction: column;
+  }
+
+  .gh-subscribe-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

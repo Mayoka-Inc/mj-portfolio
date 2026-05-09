@@ -1,0 +1,29 @@
+# MJ — Builder · Developer · Visionary
+
+> Building at the intersection of software, AI infrastructure, and entrepreneurship. Ships things that matter.
+
+## About
+
+MJ is a builder and developer focused on software, AI infrastructure, and entrepreneurship. He ships products that matter and builds in public.
+
+## Contact
+
+- Email: team@mayoka.dev
+- Website: https://mayoka.dev
+
+## Site Structure
+
+- Homepage: https://mayoka.dev/
+- Blog: Coming soon
+
+## Recent Work
+
+- Building in public at the intersection of software and AI
+- Focused on AI infrastructure and developer tools
+- Entrepreneurship and shipping products
+
+## Technical Details
+
+- Static website
+- No JavaScript frameworks required for content
+- Fast, accessible, mobile-responsive
